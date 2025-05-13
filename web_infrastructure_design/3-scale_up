@@ -1,0 +1,51 @@
+https://imgur.com/a/nWMIFvV
+
+This diagram shows a scaled up web infrastructure with component separation:
+- 2 Load balancers (HAproxy cluster)
+- 2 Web servers (dedicated to static content)
+- 2 Application servers (dedicated to business logic)
+- 3 Database servers (1 Primary + 2 Replicas)
+
+Additional elements and explanations:
+
+1 Additional Server:
+- Added dedicated database servers to separate data layer
+- Allows independent scaling of database resources
+- Improves performance by dedicating servers to specific functions
+
+Load Balancer Cluster:
+- 2 HAproxy servers configured in Active-Passive cluster
+- Primary handles traffic, backup takes over if primary fails
+- Heartbeat connection monitors health between load balancers
+- Eliminates single point of failure at load balancer level
+- Provides seamless failover and high availability
+
+Component Separation:
+- Web Servers: Handle static content, reverse proxy, SSL termination
+- Application Servers: Process business logic, dynamic content, API calls
+- Database Servers: Dedicated data storage, optimized for I/O operations
+
+Web Server vs Application Server:
+
+Web Server (Nginx):
+- Serves static files (HTML, CSS, JavaScript, images)
+- Acts as reverse proxy to application servers
+- Handles SSL/TLS termination
+- Manages HTTP caching
+- Optimized for high-concurrency static content delivery
+
+Application Server:
+- Executes business logic and application code
+- Processes dynamic requests and API calls
+- Manages sessions and user authentication
+- Handles database connections and queries
+- Optimized for computational processing
+
+Benefits of this architecture:
+- Independent scaling: Each tier can be scaled based on specific demands
+- Resource optimization: Servers tuned for their specific roles
+- Easier maintenance: Updates to one component don't affect others
+- Better security: Network segmentation between tiers
+- Improved performance: Specialized servers handle their optimal workloads
+- Cost efficiency: Right-size servers for specific functions
+- Enhanced monitoring: Clearer metrics per component type
