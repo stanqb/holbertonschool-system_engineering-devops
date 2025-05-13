@@ -1,0 +1,24 @@
+https://imgur.com/L4ZFWe6
+
+This diagram shows a simple web infrastructure with:
+- One server (IP: 8.8.8.8) containing:
+  - Nginx web server
+  - Application server
+  - Application files
+  - MySQL database
+- Domain name: foobar.com with www record pointing to 8.8.8.8
+- User accessing www.foobar.com
+
+Explanations:
+1. Server: A physical or virtual machine that hosts and serves the website
+2. Domain name: Human-readable address (foobar.com) that maps to server IP
+3. DNS record: www is a CNAME record pointing to the main domain
+4. Web server (Nginx): Handles HTTP requests and serves static content
+5. Application server: Processes dynamic content and business logic
+6. Database (MySQL): Stores and manages application data
+7. Communication: HTTP/HTTPS protocol over TCP/IP
+
+Issues with this infrastructure:
+- SPOF: Single server failure brings down entire website
+- Downtime: Maintenance requires server restart, causing unavailability
+- Scalability: Cannot handle high traffic loads efficiently
