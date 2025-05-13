@@ -1,0 +1,45 @@
+https://imgur.com/a/vAfOnAp
+
+This diagram shows a distributed web infrastructure with:
+- 1 load balancer (HAproxy)
+- 2 servers, each containing:
+  - Nginx web server
+  - Application server
+  - Application files
+  - MySQL database (Primary/Replica)
+
+Additional elements and explanations:
+
+Load Balancer (HAproxy):
+- Added to distribute incoming requests across multiple servers
+- Eliminates single point of failure at server level
+- Improves performance and enables horizontal scaling
+- Configured with Round-Robin distribution algorithm
+- Enables Active-Active setup (both servers handle traffic simultaneously)
+
+Distribution Algorithm:
+- Round-Robin: Requests are distributed sequentially to each server
+- Each server gets equal share of traffic
+- Simple and effective for servers with similar capacity
+
+Active-Active vs Active-Passive:
+- Active-Active: Both servers actively handle requests simultaneously
+- Active-Passive: One server handles traffic, other serves as backup
+- We use Active-Active for better resource utilization
+
+Database Primary-Replica Cluster:
+- Primary (Master): Handles all write operations
+- Replica (Slave): Receives data from Primary, handles read operations
+- Provides data redundancy and read scalability
+- Primary node processes writes, Replica synchronizes data from Primary
+
+Application interaction:
+- Primary node: Application writes user data, updates, transactions
+- Replica node: Application reads data for queries, reports, searches
+
+Issues with this infrastructure:
+- SPOF: Load balancer failure brings down entire system
+- Security: No firewall protection, no HTTPS encryption
+- No monitoring: Cannot track performance or detect issues
+- Single write node: Primary database failure stops all writes
+- Identical components: All servers have same components, resource waste
