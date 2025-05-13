@@ -1,0 +1,49 @@
+https://imgur.com/a/OP67xi1
+
+This diagram shows a secured and monitored web infrastructure with:
+- 3 firewalls (1 WAF + 2 host-based)
+- 1 SSL certificate for HTTPS
+- 3 monitoring clients
+- 3 servers with complete infrastructure
+
+Additional elements and explanations:
+
+Firewalls:
+- Firewall 1 (WAF): Web Application Firewall at network edge
+  - Filters malicious web traffic, SQL injection, XSS attacks
+  - Protects before traffic reaches servers
+- Firewalls 2 & 3: Host-based firewalls on each server
+  - Controls traffic to/from individual servers
+  - Provides defense in depth
+
+SSL Certificate:
+- Enables HTTPS encryption between user and load balancer
+- Protects data in transit from interception
+- Ensures authentication and integrity
+- Using TLS 1.3 for latest security standards
+
+Monitoring:
+- 3 monitoring clients (one per server)
+- Collects metrics: CPU, memory, disk, network, application performance
+- Sends data to centralized monitoring service (Sumologic/DataDog)
+- Enables real-time alerting and performance tracking
+
+Data Collection:
+- Agents installed on each server collect system and application metrics
+- Data sent via secure HTTPS to monitoring service
+- Metrics include: response times, error rates, resource utilization
+
+QPS Monitoring:
+- Configure monitoring client to parse nginx access logs
+- Count requests per second using log analysis tools
+- Set up alerts for abnormal QPS thresholds
+- Use tools like GoAccess or custom scripts for real-time QPS tracking
+
+Issues with this infrastructure:
+- SSL termination at load balancer: Internal traffic unencrypted
+  - Solution: End-to-end encryption or internal SSL certificates
+- Single MySQL write server: Bottleneck and single point of failure
+  - Solution: Multi-master setup or database clustering
+- Identical server components: Resource waste and inefficiency
+  - Solution: Separate database servers, use dedicated app servers
+  - Results in better resource allocation and easier scaling
